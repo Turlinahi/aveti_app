@@ -1,7 +1,7 @@
-/* App.css */
+/* Header Styles */
 .header {
   display: flex;
-  justify-content: flex-end; /* Move the buttons to the right */
+  justify-content: flex-end;
   padding: 10px;
   background-color: #3498db;
 }
@@ -13,30 +13,31 @@
 .header-buttons a {
   color: rgb(19, 19, 227);
   text-decoration: none;
-  margin-left: 10px; /* Add some space between the buttons */
-  padding: 5px 10px; /* Adjust padding for spacing and appearance */
+  margin-left: 10px;
+  padding: 5px 10px;
   border-radius: 5px;
-  background-color: #fff; /* White background color */
+  background-color: #fff;
 }
 
+/* Container Styles */
 .container {
-  display: flex; /* Use flex display for the container */
+  display: flex;
 }
 
 .left-menu {
-  width: 150px; /* Adjust the width as needed */
-  margin-top: 20px; /* Adjust the margin to move the entire square down */
+  width: 150px;
+  margin-top: 20px;
 }
 
 .content {
-  flex: 1; /* Allow the content to grow and take remaining space */
-  margin-left: 300px; /* Adjust the margin to leave space for the menu */
-  align-self: flex-start; /* Align content to the start of the cross axis (vertically) */
+  flex: 1;
+  margin-left: 300px;
+  align-self: flex-start;
   margin-top: 15px;
 }
 
 .menu-container {
-  background-color: #3498db; /* Use the same color as the header */
+  background-color: #3498db;
   padding: 10px;
   border-radius: 5px;
 }
@@ -49,33 +50,48 @@
   padding: 10px;
 }
 
-.grades-table {
-  margin-top: 20px;
+/* Table Styles */
+.table-container {
+  margin: 20px;
 }
 
-.grades-table table {
+.table-container table {
   width: 100%;
   border-collapse: collapse;
 }
 
-.grades-table th, .grades-table td {
+.table-container th,
+.table-container td {
   border: 1px solid black;
   padding: 8px;
   text-align: center;
 }
 
+/* Grades Table Styles */
+.grades-table {
+  margin-top: 20px;
+}
 
-.grade-content {
+/* Content Styles */
+.grade-content,
+.table-content,
+.subtopics-table,
+.topics-table {
   margin: 20px;
 }
 
+/* Form Styles */
 .add-form {
   margin-top: 20px;
+  margin-left: 10px;
+  display: flex;
+  align-items: baseline;
 }
 
 label {
   display: block;
   margin-bottom: 8px;
+  margin-right: 10px;
 }
 
 input {
@@ -84,40 +100,67 @@ input {
   margin-right: 30px;
 }
 
-
 .submit-button,
-.add-button {
-  font-size: 20px; /* Adjust the font size to your preference */
+.add-button,
+.edit-button,
+.delete-button,
+.save-button,
+.cancel-button {
+  font-size: 20px;
   background-color: #3498db;
   color: #fff;
   border: none;
-  padding: 8px 12px; /* Adjust padding for a smaller size */
+  padding: 8px 12px;
   cursor: pointer;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  margin-left: 450px;
+  margin-left: 10px;
 }
 
-
 .submit-button:hover,
-.add-button:hover {
+.add-button:hover,
+.edit-button:hover,
+.delete-button:hover,
+.save-button:hover,
+.cancel-button:hover {
   background-color: #2980b9;
 }
 
-.edit-button,
-.delete-button {
-  color: #4a0bea;
-  border: none;
+/* Books Table Styles */
+.books-table,
+.topics-table,
+.subtopics-table,
+.chunks-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.grades-table th,
+.grades-table td,
+.books-table th,
+.books-table td,
+.topics-table th,
+.topics-table td,
+.subtopics-table th,
+.subtopics-table td,
+.chunks-table th,
+.chunks-table td {
+  border: 1px solid #dddddd;
   padding: 8px;
-  cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-right: 5px;
+  text-align: left;
 }
 
+.grades-table th,
+.books-table th,
+.topics-table th,
+.subtopics-table th,
+.chunks-table th {
+  background-color: #f2f2f2;
+}
+
+/* Image Styles */
 .thumbnail-img {
-  width: 150px; 
-  height: auto; 
-  margin-left: 20px; 
+  width: 150px;
+  height: auto;
+  margin-left: 20px;
 }
-
-

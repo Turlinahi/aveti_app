@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-
+import { faEdit, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const Grade = () => {
   // list of grades
@@ -13,37 +12,73 @@ const Grade = () => {
   // state to manage whether to show the input form for adding a grade
   const [isAddingGrade, setIsAddingGrade] = useState(false);
 
-  // Function to handle adding a new grade
-  const handleAddGrade = () => { // Logic to add a new grade to the list
-    
-    setGrades([...grades, newGrade]); // Clear the input field after adding a grade
+  // state to manage edit mode
+  const [editIndex, setEditIndex] = useState(null);
 
-    setNewGrade(''); // Close the input form
-    
+  // state to track the edited grade
+  const [editedGrade, setEditedGrade] = useState('');
+
+  // Function to handle adding a new grade
+  const handleAddGrade = () => {
+    // Logic to add a new grade to the list
+    setGrades([...grades, newGrade]);
+
+    // Clear the input field after adding a grade
+    setNewGrade('');
+
+    // Close the input form
     setIsAddingGrade(false);
   };
 
   // Function to handle the click event of the "Add" button
   const handleAddButtonClick = () => {
-    
     setIsAddingGrade(true);
   };
 
-// Function to handle editing a grade
-const handleEditGrade = (index) => {
-  // Logic to handle edit action
-  console.log(`Edit grade at index ${index}`);
-};
+  // Function to handle editing a grade
+  const handleEditGrade = (index) => {
+    // Set the index and the initial value of the edited grade
+    setEditIndex(index);
+    setEditedGrade(grades[index]);
+  };
 
-// Function to handle deleting a grade
-const handleDeleteGrade = (index) => {
-  // Logic to handle delete action
-  console.log(`Delete grade at index ${index}`);
-};
+  // Function to handle saving the edited grade
+  const handleSaveEdit = () => {
+    // Create a copy of the grades array
+    const updatedGrades = [...grades];
+
+    // Update the grade at the specified index
+    updatedGrades[editIndex] = editedGrade;
+
+    // Update the state with the modified grades array
+    setGrades(updatedGrades);
+
+    // Reset edit mode
+    setEditIndex(null);
+    setEditedGrade('');
+  };
+
+  // Function to handle canceling the edit
+  const handleCancelEdit = () => {
+    // Reset edit mode
+    setEditIndex(null);
+    setEditedGrade('');
+  };
+
+  // Function to handle deleting a grade
+  const handleDeleteGrade = (index) => {
+    // Create a copy of the grades array
+    const updatedGrades = [...grades];
+
+    // Remove the grade at the specified index
+    updatedGrades.splice(index, 1);
+
+    // Update the state with the modified grades array
+    setGrades(updatedGrades);
+  };
 
   return (
     <div className="grade-content">
-  
       {isAddingGrade ? (
         <div className="add-form">
           <label htmlFor="newGrade">Enter Grade:</label>
@@ -58,7 +93,7 @@ const handleDeleteGrade = (index) => {
           </button>
         </div>
       ) : (
-          <div className="grades-table">
+        <div className="grades-table">
           <h2>
             Grades
             <button className="add-button" onClick={handleAddButtonClick}>
@@ -75,14 +110,37 @@ const handleDeleteGrade = (index) => {
             <tbody>
               {grades.map((grade, index) => (
                 <tr key={index}>
-                  <td>{grade}</td>
                   <td>
-                    <button className="edit-button" onClick={() => handleEditGrade(index)}>
-                      <FontAwesomeIcon icon={faEdit} />
-                    </button>
-                    <button className="delete-button" onClick={() => handleDeleteGrade(index)}>
-                      <FontAwesomeIcon icon={faTrash} />
-                    </button>
+                    {editIndex === index ? (
+                      <input
+                        type="text"
+                        value={editedGrade}
+                        onChange={(e) => setEditedGrade(e.target.value)}
+                      />
+                    ) : (
+                      grade
+                    )}
+                  </td>
+                  <td>
+                    {editIndex === index ? (
+                      <>
+                        <button className="save-button" onClick={handleSaveEdit}>
+                          <FontAwesomeIcon icon={faSave} />
+                        </button>
+                        <button className="cancel-button" onClick={handleCancelEdit}>
+                          <FontAwesomeIcon icon={faTimes} />
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button className="edit-button" onClick={() => handleEditGrade(index)}>
+                          <FontAwesomeIcon icon={faEdit} />
+                        </button>
+                        <button className="delete-button" onClick={() => handleDeleteGrade(index)}>
+                          <FontAwesomeIcon icon={faTrash} />
+                        </button>
+                      </>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -93,6 +151,5 @@ const handleDeleteGrade = (index) => {
     </div>
   );
 };
-
 
 export default Grade;

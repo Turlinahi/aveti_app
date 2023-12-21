@@ -1,4 +1,5 @@
-import React from 'react';
+// App.jsx
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
 import Home from './Components/Home';
 import Login from './Components/Login';
@@ -8,9 +9,24 @@ import Book from './Components/Book';
 import Topic from './Components/Topic';
 import Subtopic from './Components/Subtopic';
 import AddGrade from './Components/AddGrade';
+import Chunk from './Components/Chunk'
+import Status from './Components/Status';
 import './App.css';
 
 function App() {
+  const [grades, setGrades] = useState([]);
+
+  // Function to handle adding grade
+  const handleAddGrade = (grade) => {
+    setGrades([...grades, grade]);
+  };
+
+  // Function to handle adding book
+  const handleAddBook = (book) => {
+    console.log('Adding book:', book);
+    // Implement logic to add a book
+  };
+
   return (
     <div className="App">
       <Router>
@@ -29,19 +45,29 @@ function App() {
               <NavLink to="/book" className='menu-item'>Book</NavLink>
               <NavLink to="/topic" className='menu-item'>Topic</NavLink>
               <NavLink to="/subtopic" className='menu-item'>Subtopic</NavLink>
+              <NavLink to="/chunk" className='menu-item'>Chunk</NavLink>
+              <NavLink to="/status" className='menu-item'>Status</NavLink>
             </div>
           </div>
 
           <div className="content">
             <Routes>
+              <Route
+                path="/add-grade"
+                element={<AddGrade onAddGrade={(grade) => handleAddGrade(grade)} />}
+              />
+              <Route
+                path="/book"
+                element={<Book grades={grades} onAddBook={(book) => handleAddBook(book)} />}
+              />
+              <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/grade" element={<Grade />} />
-              <Route path="/book" element={<Book />} />
               <Route path="/topic" element={<Topic />} />
               <Route path="/subtopic" element={<Subtopic />} />
-              <Route path="/add-grade" element={<AddGrade onAddGrade={(grade) => { /* handle adding grade */ }} />} />
-              <Route path="/" element={<Home />} />
+              <Route path="/chunk" element={<Chunk/>} />
+              <Route path="/status" element={<Status />} />
             </Routes>
           </div>
         </div>
