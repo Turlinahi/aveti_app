@@ -1,38 +1,123 @@
-.App {
+/* App.css */
+.header {
+  display: flex;
+  justify-content: flex-end; /* Move the buttons to the right */
+  padding: 10px;
+  background-color: #3498db;
+}
+
+.header-buttons {
+  display: flex;
+}
+
+.header-buttons a {
+  color: rgb(19, 19, 227);
+  text-decoration: none;
+  margin-left: 10px; /* Add some space between the buttons */
+  padding: 5px 10px; /* Adjust padding for spacing and appearance */
+  border-radius: 5px;
+  background-color: #fff; /* White background color */
+}
+
+.container {
+  display: flex; /* Use flex display for the container */
+}
+
+.left-menu {
+  width: 150px; /* Adjust the width as needed */
+  margin-top: 20px; /* Adjust the margin to move the entire square down */
+}
+
+.content {
+  flex: 1; /* Allow the content to grow and take remaining space */
+  margin-left: 300px; /* Adjust the margin to leave space for the menu */
+  align-self: flex-start; /* Align content to the start of the cross axis (vertically) */
+  margin-top: 15px;
+}
+
+.menu-container {
+  background-color: #3498db; /* Use the same color as the header */
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.menu-item {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.grades-table {
+  margin-top: 20px;
+}
+
+.grades-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.grades-table th, .grades-table td {
+  border: 1px solid black;
+  padding: 8px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.grade-content {
+  margin: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.add-form {
+  margin-top: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+label {
+  display: block;
+  margin-bottom: 8px;
 }
 
-.App-link {
-  color: #61dafb;
+input {
+  padding: 8px;
+  margin-bottom: 12px;
+  margin-right: 30px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.submit-button,
+.add-button {
+  font-size: 20px; /* Adjust the font size to your preference */
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 12px; /* Adjust padding for a smaller size */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-left: 450px;
 }
+
+
+.submit-button:hover,
+.add-button:hover {
+  background-color: #2980b9;
+}
+
+.edit-button,
+.delete-button {
+  color: #4a0bea;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-right: 5px;
+}
+
+.thumbnail-img {
+  width: 150px; 
+  height: auto; 
+  margin-left: 20px; 
+}
+
+

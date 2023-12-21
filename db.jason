@@ -1,0 +1,15 @@
+{
+  "user": [
+    {
+      "id": "adminuser",
+      "name": "Stefanoiu",
+      "password": "admin",
+      "email": "ioanacristinastef@gmail.com",
+      "phone": "8989898989",
+      "country": "Romania",
+      "address": "",
+      "role":"admin",
+      "gender": "female"
+    }
+  ]
+}
