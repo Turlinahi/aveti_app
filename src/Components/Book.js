@@ -2,11 +2,20 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+const EmptyImage = () => (
+  <div className="empty-image-container">
+    <img
+      src="https://i.pinimg.com/564x/8d/4d/93/8d4d93a04ba9700c80c5b8cf08ce598e.jpg"
+      alt="Empty Image"
+      className="empty-image"
+    />
+  </div>
+);
+
 const Book = () => {
   const grades = Array.from({ length: 8 }, (_, i) => i + 1);
   const languages = [
-    'English', 'Spanish', 'French', 'German', 'Chinese', 'Japanese', 'Korean', 'Russian', 'Arabic',
-    // ... adăugați mai multe limbi după necesitate
+    'Hindi', 'English', 'Spanish', 'French', 'German', 'Chinese', 'Japanese', 'Korean', 'Russian', 'Arabic',
   ];
 
   const [books, setBooks] = useState([]);
@@ -66,7 +75,7 @@ const Book = () => {
   return (
     <div className='table-content'>
       {/* Dropdown list of grades */}
-      <div>
+      <div className='dropdown-container'>
         <label htmlFor="gradeDropdown">Select Grade:</label>
         <select
           id="gradeDropdown"
@@ -93,19 +102,21 @@ const Book = () => {
           />
 
           {/* Choose Language dropdown */}
-          <label htmlFor="languageDropdown">Choose Language:</label>
-          <select
-            id="languageDropdown"
-            onChange={(e) => setSelectedLanguage(e.target.value)}
-            value={selectedLanguage}
-          >
-            <option value="">Choose a Language</option>
-            {languages.map((language, index) => (
-              <option key={index} value={language}>
-                {language}
-              </option>
-            ))}
-          </select>
+          <div className='dropdown-container'>
+            <label htmlFor="languageDropdown">Choose Language:</label>
+            <select
+              id="languageDropdown"
+              onChange={(e) => setSelectedLanguage(e.target.value)}
+              value={selectedLanguage}
+            >
+              <option value="">Choose a Language</option>
+              {languages.map((language, index) => (
+                <option key={index} value={language}>
+                  {language}
+                </option>
+              ))}
+            </select>
+          </div>
 
           {/* Submit button */}
           <button className='submit-button' onClick={handleAddBook}>
@@ -113,7 +124,7 @@ const Book = () => {
           </button>
         </div>
       ) : (
-        <div className='books-table'>
+        <div className='p-table'>
           <h2>
             Books
             <button className='add-button' onClick={handleAddButtonClick}>
@@ -121,13 +132,13 @@ const Book = () => {
             </button>
           </h2>
 
-          <table className='books-table'>
+          <table className='p-table-body'>
             <thead>
               <tr>
-                <th>Book</th>
-                <th>Grade</th>
-                <th>Language</th>
-                <th>Actions</th>
+                <th style={{ width: "250px" }}>Book</th>
+                <th style={{ width: "5px" }}>Grade</th>
+                <th style={{ width: "10px" }}>Language</th>
+                <th style={{ width: "5px" }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -203,6 +214,9 @@ const Book = () => {
               ))}
             </tbody>
           </table>
+          
+          {/* Conditionally render the empty image */}
+          {books.length === 0 && !isAddingBook && <EmptyImage />}
         </div>
       )}
     </div>

@@ -2,6 +2,18 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+
+const EmptyImage = () => (
+  <div className="empty-image-container">
+    <img
+      src="https://i.pinimg.com/564x/b8/e6/7e/b8e67ed688088ba281a646ac79b0a7c9.jpg"
+      alt="Empty Image"
+      className="empty-image"
+    />
+  </div>
+);
+
+
 const Topic = () => {
   const grades = Array.from({ length: 8 }, (_, i) => i + 1);
 
@@ -64,34 +76,39 @@ const Topic = () => {
     <div className='table-content'>
       <div>
         {/* Dropdown list of grades */}
-        <label htmlFor="gradeDropdown">Choose Grade:</label>
-        <select
-          id="gradeDropdown"
-          onChange={(e) => setSelectedGrade(e.target.value)}
-          value={selectedGrade}
-        >
-          <option value="">Select a Grade</option>
-          {grades.map((grade) => (
-            <option key={grade} value={grade}>
-              {grade}
-            </option>
-          ))}
-        </select>
+        <div className="dropdown-container">
+          <label htmlFor="gradeDropdown">Choose Grade:</label>
+          <select
+            id="gradeDropdown"
+            onChange={(e) => setSelectedGrade(e.target.value)}
+            value={selectedGrade}
+          >
+            <option value="">Select a Grade</option>
+            {grades.map((grade) => (
+              <option key={grade} value={grade}>
+                {grade}
+              </option>
+            ))}
+          </select>
+        </div>
 
         {/* Dropdown list of books */}
-        <label htmlFor="bookDropdown">Choose Book:</label>
-        <select
-          id="bookDropdown"
-          onChange={(e) => setSelectedBook(e.target.value)}
-          value={selectedBook}
-        >
-          <option value="">Select a Book</option>
-          {filteredTopics.map(topic => topic.book).filter((value, index, self) => self.indexOf(value) === index).map((book, index) => (
-            <option key={index} value={book}>
-              {book}
-            </option>
-          ))}
-        </select>
+        <div className="dropdown-container">
+          <label htmlFor="bookDropdown">Choose Book:</label>
+          <select
+            id="bookDropdown"
+            onChange={(e) => setSelectedBook(e.target.value)}
+            value={selectedBook}
+          >
+            <option value="">Select a Book</option>
+            {filteredTopics.map(topic => topic.book).filter((value, index, self) => self.indexOf(value) === index).map((book, index) => (
+              <option key={index} value={book}>
+                {book}
+              </option>
+            ))}
+          </select>
+          <button className='add-button' onClick={handleAddButtonClick}>Add</button>
+        </div>
       </div>
 
       {isAddingTopic ? (
@@ -110,15 +127,8 @@ const Topic = () => {
           </button>
         </div>
       ) : (
-        <div className='topics-table'>
-          <h2>
-            Topics
-            <button className='add-button' onClick={handleAddButtonClick}>
-              Add
-            </button>
-          </h2>
-
-          <table className='topics-table'>
+        <div className='p-table'>
+          <table className='p-table-body'>
             <thead>
               <tr>
                 <th>Topic</th>
@@ -199,6 +209,8 @@ const Topic = () => {
               ))}
             </tbody>
           </table>
+                    {/* Conditionally render the empty image */}
+                    {topics.length === 0 && !isAddingTopic && <EmptyImage />}
         </div>
       )}
     </div>

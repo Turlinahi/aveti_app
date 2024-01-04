@@ -2,6 +2,16 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+const EmptyImage = () => (
+  <div className="empty-image-container">
+    <img
+      src="https://i.pinimg.com/564x/95/84/1a/95841a9393183d2e3fa5ec5c5098df42.jpg"
+      alt="Empty Image"
+      className="empty-image"
+    />
+  </div>
+);
+
 const Grade = () => {
   // list of grades
   const [grades, setGrades] = useState([]);
@@ -78,7 +88,8 @@ const Grade = () => {
   };
 
   return (
-    <div className="grade-content">
+    <div className="table-content">
+      
       {isAddingGrade ? (
         <div className="add-form">
           <label htmlFor="newGrade">Enter Grade:</label>
@@ -88,29 +99,31 @@ const Grade = () => {
             value={newGrade}
             onChange={(e) => setNewGrade(e.target.value)}
           />
-          <button className="submit-button" onClick={handleAddGrade}>
-            Submit
-          </button>
+          <div className='submit-button-container'>
+            <button className="submit-button" onClick={handleAddGrade}>
+              Submit
+            </button>
+          </div>
         </div>
       ) : (
-        <div className="grades-table">
+        <div className="p-table">
           <h2>
             Grades
             <button className="add-button" onClick={handleAddButtonClick}>
               Add
             </button>
           </h2>
-          <table>
+          <table className="p-table-body">
             <thead>
               <tr>
-                <th>Grade</th>
-                <th>Actions</th>
+                <th style={{ width: "150px" }}>Grade</th>
+                <th style={{ width: "100px" }}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {grades.map((grade, index) => (
                 <tr key={index}>
-                  <td>
+                  <td className="grade-cell">
                     {editIndex === index ? (
                       <input
                         type="text"
@@ -121,31 +134,34 @@ const Grade = () => {
                       grade
                     )}
                   </td>
-                  <td>
-                    {editIndex === index ? (
-                      <>
-                        <button className="save-button" onClick={handleSaveEdit}>
-                          <FontAwesomeIcon icon={faSave} />
-                        </button>
-                        <button className="cancel-button" onClick={handleCancelEdit}>
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button className="edit-button" onClick={() => handleEditGrade(index)}>
-                          <FontAwesomeIcon icon={faEdit} />
-                        </button>
-                        <button className="delete-button" onClick={() => handleDeleteGrade(index)}>
-                          <FontAwesomeIcon icon={faTrash} />
-                        </button>
-                      </>
-                    )}
+                  <td className="actions-cell">
+                    <div className="edit-bts">
+                      {editIndex === index ? (
+                        <>
+                          <button className="save-button" onClick={handleSaveEdit}>
+                            <FontAwesomeIcon icon={faSave} />
+                          </button>
+                          <button className="cancel-button" onClick={handleCancelEdit}>
+                            <FontAwesomeIcon icon={faTimes} />
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button className="edit-button" onClick={() => handleEditGrade(index)}>
+                            <FontAwesomeIcon icon={faEdit} />
+                          </button>
+                          <button className="delete-button" onClick={() => handleDeleteGrade(index)}>
+                            <FontAwesomeIcon icon={faTrash} />
+                          </button>
+                        </>
+                      )}
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
+          {grades.length === 0 && !isAddingGrade && <EmptyImage />}
         </div>
       )}
     </div>

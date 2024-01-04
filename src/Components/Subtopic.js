@@ -2,6 +2,17 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
+
+const EmptyImage = () => (
+  <div className="empty-image-container">
+    <img
+      src="https://i.pinimg.com/564x/4a/72/d7/4a72d7f128e6a5c961dd445cb0fb36da.jpg"
+      alt="Empty Image"
+      className="empty-image"
+    />
+  </div>
+);
+
 const Subtopic = () => {
   const grades = Array.from({ length: 8 }, (_, i) => i + 1);
 
@@ -70,6 +81,7 @@ const Subtopic = () => {
     <div className='table-content'>
       <div>
         {/* Dropdown list of grades */}
+        <div className="dropdown-container">
         <label htmlFor="gradeDropdown">Choose Grade:</label>
         <select
           id="gradeDropdown"
@@ -83,8 +95,10 @@ const Subtopic = () => {
             </option>
           ))}
         </select>
+        </div>
 
         {/* Dropdown list of books */}
+        <div className="dropdown-container">
         <label htmlFor="bookDropdown">Choose Book:</label>
         <select
           id="bookDropdown"
@@ -98,8 +112,10 @@ const Subtopic = () => {
             </option>
           ))}
         </select>
+        </div>
 
         {/* Dropdown list of topics */}
+        <div className="dropdown-container">
         <label htmlFor="topicDropdown">Choose Topic:</label>
         <select
           id="topicDropdown"
@@ -113,6 +129,11 @@ const Subtopic = () => {
             </option>
           ))}
         </select>
+                  
+        <button className='add-button' onClick={handleAddButtonClick}>
+              Add
+            </button>
+        </div>
       </div>
 
       {isAddingSubtopic ? (
@@ -131,22 +152,17 @@ const Subtopic = () => {
           </button>
         </div>
       ) : (
-        <div className='subtopics-table'>
-          <h2>
-            Subtopics
-            <button className='add-button' onClick={handleAddButtonClick}>
-              Add
-            </button>
-          </h2>
+        <div className='p-table'>
 
-          <table className='subtopics-table'>
+
+          <table className='p-table-body'>
             <thead>
               <tr>
-                <th>Subtopic</th>
-                <th>Grade</th>
-                <th>Book</th>
-                <th>Topic</th>
-                <th>Actions</th>
+                <th style={{ width: '200px' }}>Subtopic</th>
+                <th style={{ width: '10px' }}>Grade</th>
+                <th style={{ width: '100px' }}>Book</th>
+                <th style={{ width: '100px' }}>Topic</th>
+                <th style={{ width: '10px' }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -237,6 +253,8 @@ const Subtopic = () => {
               ))}
             </tbody>
           </table>
+          {/* Conditionally render the empty image */}
+          {subtopics.length === 0 && !isAddingSubtopic && <EmptyImage />}
         </div>
       )}
     </div>
